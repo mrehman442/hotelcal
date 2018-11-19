@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hotel </title>
+</head>
+<body>
+<table border="" cellspacing='5px'>
+    <tr>
+        <td id="menu">Biryani</td>
+        <td><input class="dish" type="checkbox"></td>
+        <td class="price">150</td>
+        <td><input type="number" value="1"></td>
+    </tr>
+    <tr>
+        <td>Mutton</td>
+        <td><input class="dish" type="checkbox"></td>
+        <td class="price">250</td>
+        <td><input type="number" value="1"></td>
+    </tr>
+    <tr>
+        <td>Shawarma</td>
+        <td><input class="dish" type="checkbox"></td>
+        <td>70</td>
+        <td><input type="number" value="1"></td>
+    </tr>
+    <tr>
+        <td>Burger</td>
+        <td><input class="dish" type="checkbox"></td>
+        <td>350</td>
+        <td><input type="number" value="1"></td>
+    </tr>
+    <tfoot>
+        <tr>
+            <td><input type="button" value="Calculate" onclick="calculateBill()"></td>
+            <td> 5% off </td>
+            <td colspan="2">
+                <div id="output"></div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<script>
+    //01- Method 1 forEach is ma wo array ki value ka uper hi override kr dee ga
+    /*let data = [1,2,3,4,5];
+
+    data.forEach(function(item){
+        console.log(item * 2);
+    });*/
+    // Method 2
+   /* let data = [1,2,3,4,5];
+    function dowork(item) {
+        console.log(item*3);
+    }
+    data.forEach (dowork);*/
+
+    // 02- map new array return krta ha or is ka sat return lagana lazmi ha nahi tu wo return value 
+    // show nahi kr ga....
+   /* let dataMap = [1,2,3,4,5];
+
+    let num = dataMap.map(function(item){
+        return item * item;
+    });*/
+
+    function calculateBill(a){
+        let dishes = document.querySelectorAll('.dish');
+        let totalBill = 0;
+
+        dishes.forEach(function(dish){
+            if (dish.checked) {
+                let price = +dish.parentNode.nextElementSibling.innerText;
+                let qty = +dish.parentNode.nextElementSibling.nextElementSibling.querySelector('input').value;
+                totalBill += price * qty;
+                if(totalBill>200){
+                    dicountBill = totalBill - (totalBill/100 *5);
+                }
+            }
+        });
+        output.innerText =dicountBill;
+        // console.log (totalBill);
+    }
+    document.onkeydown = function(press){
+        if(press.key == 'Enter'){
+            calculateBill();
+        }
+    }
+    </script>
+</body>
+</html>
